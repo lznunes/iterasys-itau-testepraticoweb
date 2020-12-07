@@ -1,0 +1,106 @@
+package Steps;
+
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertTrue;
+
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import com.google.common.io.Files;
+
+import Pages.HomePage;
+import cucumber.api.PendingException;
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
+
+public class ConsultaRacaoSteps {
+	
+	private static WebDriver driver;
+	public String pastalog ;
+	protected static HomePage homePage;
+	
+	
+	@Before
+	public static void inicia() {
+		System.setProperty("webdriver.chrome.driver","C:\\Users\\nunesnel\\aula\\iterasys-web\\TestWeb\\drives\\chromedriver.exe");
+		driver = new ChromeDriver();
+		homePage = new HomePage(driver);
+
+		
+	}
+	
+	@Given("^Acesso o site$")
+	public void acesso_o_site() throws Throwable {
+	    pastalog = gerapastalog();
+	    homePage.carregasite();
+	    assertThat(homePage.obterTitulo(), is("Pet Shop: Petz o maior pet shop do Brasil."));
+	}
+
+	@When("^Consulta o terceiro produto retornado da busca$")
+	public void consulta_o_terceiro_produto_retornado_da_busca() throws Throwable {
+	}
+
+	@Then("^Valida nome do produto, fornecedor, preco normal e precoassinante$")
+	public void valida_nome_do_produto_fornecedor_preco_normal_e_precoassinante() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new PendingException();
+	}
+
+	@Then("^Insire o produto no carrinho de compras$")
+	public void insire_o_produto_no_carrinho_de_compras() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new PendingException();
+	}
+
+	@Then("^Valide se os dados do item tres continuam identicos$")
+	public void valide_se_os_dados_do_item_tres_continuam_identicos() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new PendingException();
+	}
+	
+////////////////////
+	
+
+
+
+
+
+//Gera pasta para salvar logs
+	public static String gerapastalog() {
+		Date date = new Date();
+		SimpleDateFormat DateFor = new SimpleDateFormat("yyyy-MM-dd hhmmss");
+		String stringdate = DateFor.format(date);
+		return stringdate;
+	}
+	
+	@After
+	public static void encerra() {
+		driver.quit();
+	}
+
+//captura tela
+	public void capturascreen(String produto, String passo, String pastalog) {
+		var screen = (TakesScreenshot) driver;
+		File pasta = new File("C:\\Users\\nunesnel\\aula\\iterasys-web\\TestWeb\\src\\test\\resources\\" + pastalog);
+        pasta.mkdir();
+		File arquivo = screen.getScreenshotAs(OutputType.FILE);
+		try {
+		Files.move(arquivo, new File(pasta + "//Teste_" + produto + "_" + passo + ".png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+}

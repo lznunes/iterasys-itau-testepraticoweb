@@ -1,0 +1,116 @@
+package Base;
+
+import java.awt.Desktop;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Rule;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.rules.TestRule;
+import org.junit.rules.TestWatcher;
+import org.junit.runner.Description;
+import org.junit.runners.model.Statement;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+
+
+
+import Pages.HomePage;
+
+public class Base {
+	private static WebDriver driver;
+	protected HomePage homePage;
+	
+	@BeforeAll
+	public static void inicia() {
+		System.setProperty("webdriver.chrome.driver","C:\\Users\\nunesnel\\aula\\iterasys-web\\TestWeb\\drives\\chromedriver.exe");
+		driver = new ChromeDriver();
+	}
+	
+	@BeforeEach
+	public void carregaSite() {
+		String url = "https://www.petz.com.br";
+		driver.get(url);
+		//todas janelas com timeout e maximizadas
+		driver.manage().timeouts().implicitlyWait(50000, TimeUnit.MILLISECONDS);
+		driver.manage().window().maximize();
+		homePage = new HomePage(driver);
+	}
+	
+	
+	
+	@AfterAll
+	public static void encerra() {
+		driver.quit();
+	}
+
+///---------------------
+	
+	static File junitReport;
+	static BufferedWriter junitWriter;
+
+	@BeforeClass
+	public static void setUp() throws IOException {
+		String junitReportFile  = "C:\\Users\\nunesnel\\aula\\iterasys-web\\TestWeb\\src\test\\Logs\\junitReportFile.html";
+		DateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
+		Date date = new Date();
+		junitReport = new File(junitReportFile);
+		junitWriter = new BufferedWriter(new FileWriter(junitReport, true));
+		junitWriter.write("<html><body>");
+		junitWriter.write("<h1>Test Execution Summary - " + dateFormat.format(date)
+				+ "</h1>");
+
+	}
+
+	@AfterClass
+	public static void tearDown() throws IOException {
+
+		junitWriter.write("</body></html>");
+		junitWriter.close();
+		Desktop.getDesktop().browse(junitReport.toURI());
+
+	}
+
+	@Rule
+	public TestRule watchman = new TestWatcher() {
+
+		@Override
+		public Statement apply(Statement base, Description description) {
+			return super.apply(base, description);
+		}
+
+		@Override
+		protected void succeeded(Description description) {
+			try {
+				junitWriter.write(description.getDisplayName() + " "
+						+ "success!");
+				junitWriter.write("<br/>");
+			} catch (Exception e1) {
+				System.out.println(e1.getMessage());
+			}
+		}
+
+		@Override
+		protected void failed(Throwable e, Description description) {
+			try {
+				junitWriter.write(description.getDisplayName() + " "
+						+ e.getClass().getSimpleName());
+				junitWriter.write("<br/>");
+			} catch (Exception e2) {
+				System.out.println(e2.getMessage());
+			}
+		}
+	};
+	
+}

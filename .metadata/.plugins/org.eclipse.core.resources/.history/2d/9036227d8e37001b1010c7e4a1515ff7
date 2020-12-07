@@ -1,0 +1,22 @@
+package TestSitePetz;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
+import Base.Base;
+
+public class TestSimples extends Base{
+	
+	@Test
+	public void consultaRacao() {		
+		carregaSite();
+		homePage.localizProdutos("Ração");
+		homePage.clicanoProduto3();
+		String produto = "qualquer coisa";
+		assertEquals(produto, homePage.descricaoProduto());
+	}
+	
+	
+
+}

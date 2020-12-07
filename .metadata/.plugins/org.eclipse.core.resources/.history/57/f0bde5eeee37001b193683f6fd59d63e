@@ -1,0 +1,11 @@
+# language pt
+Feature: Consultar Site
+
+  Cenario: Selecionar o terceiro produto da lista retornada.
+     Faz busca no site
+    When Seleciona o terceiro produto da busca
+    Then Valida nome do produto, fornecedor, preço normal e preço para assinante
+
+  Scenarios: Validar item do carrinho
+    Given Insere produto no carrinho
+    Then Valida se os dados continuam identicos

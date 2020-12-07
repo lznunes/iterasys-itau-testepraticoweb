@@ -1,0 +1,39 @@
+package Base;
+
+import java.util.concurrent.TimeUnit;
+
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import Pages.HomePage;
+
+public class Base {
+	private static WebDriver driver;
+	protected HomePage homePage;
+	
+	@BeforeAll
+	public void inicia() {
+		System.setProperty("webdriver.chrome.driver","C:\\Users\\nunesnel\\aula\\iterasys-web\\TestWeb\\drives\\chromedriver.exe");
+		driver = new ChromeDriver();
+	}
+	
+	@BeforeEach
+	public void carregaSite() {
+		String url = "https://www.petz.com.br";
+		driver.get(url);
+		//todas janelas com timeout e maximizadas
+		driver.manage().timeouts().implicitlyWait(50000, TimeUnit.MILLISECONDS);
+		driver.manage().window().maximize();
+		homePage = new HomePage(driver);
+	}
+	
+	
+	
+	@AfterAll
+	public void encerra() {
+		driver.quit();
+	}
+}

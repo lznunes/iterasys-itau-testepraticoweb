@@ -1,0 +1,11 @@
+# language: pt
+Funcionalidade: Consultar Racao
+
+  Cenario: Selecionar o terceiro produto da lista retornada.
+    Quando Faz busca no site
+    Entao Seleciona o terceiro produto da busca
+    E Valida nome do produto, fornecedor, preço normal e preço para assinante
+
+  Cenario: Validar item do carrinho
+    Quando Insere produto no carrinho
+    Entao Valida se os dados continuam identicos

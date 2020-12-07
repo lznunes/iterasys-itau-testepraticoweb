@@ -1,0 +1,53 @@
+package TestSitePetz;
+
+import static org.junit.Assert.assertEquals;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
+
+import Base.Base;
+
+public class TestSimples extends Base{
+	
+	
+	
+	@Test
+	public void TesteSimples() {		
+		carregaSite();
+		homePage.localizProdutos("Ração");
+		capturascreen("Ração", "resultado_pesquisa");
+		homePage.clicanoProduto3();
+		String decricao = homePage.descricaoProduto();
+		String preco = homePage.preconormalProduto();
+		capturascreen("Ração", "produto_selecionado");
+		homePage.clicaAdicionarCarrinho();
+		String decricaocarrinho = homePage.descricaoProduto();
+		String precocarrinho = homePage.precoProdutoCarrinho();
+		capturascreen("Ração", "adicionado_carrinho");
+		homePage.limpacarrinho();
+		assertEquals(decricao, decricaocarrinho);
+		assertEquals(preco, precocarrinho);
+		
+	}
+	
+	@ParameterizedTest
+	@CsvFileSource(resources = "/massateste.csv", numLinesToSkip = 1, delimiter= ';')
+	public void TesteMassa(String Produto) {		
+		carregaSite();
+		homePage.localizProdutos(Produto);
+		homePage.clicanoProduto3();
+		String decricao = homePage.descricaoProduto();
+		String preco = homePage.preconormalProduto();
+		homePage.clicaAdicionarCarrinho();
+		String decricaocarrinho = homePage.descricaoProduto();
+		String precocarrinho = homePage.precoProdutoCarrinho();
+		homePage.limpacarrinho();
+		assertEquals(decricao, decricaocarrinho);
+		assertEquals(preco, precocarrinho);
+	}
+	
+	
+	
+
+}

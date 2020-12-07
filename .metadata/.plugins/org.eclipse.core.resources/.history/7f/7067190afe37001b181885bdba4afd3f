@@ -1,0 +1,6 @@
+Feature: Consultar produtos no site
+Scenario: Consulta por Racao
+Given Acesso o site.
+When Consulta o terceiro produto retornado da busca
+Then Valida nome do produto, fornecedor, preco normal e precoassinante
+And Esvazia carrinho

@@ -1,0 +1,12 @@
+# language pt
+Funcionalidade: Consultar Site
+
+  Cenario: Selecionar o terceiro produto da lista retornada.
+    Dado busca no site
+    Quando Seleciona o terceiro produto da busca
+    Entao Valida nome do produto, fornecedor, preço normal e preço para assinante
+
+  Cenarios: Validar item do carrinho
+    Dado Insere produto no carrinho
+    Quando Valida se os dados continuam identicos
+		Entao Valida se os dados continuam identicos

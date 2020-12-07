@@ -1,0 +1,14 @@
+package TestSitePetz;
+
+import org.junit.jupiter.api.Test;
+
+public class TestSimples extends Base{
+	
+	@Test
+	public void consultaRacao() {		
+		carregaSite();
+	}
+	
+	
+
+}

@@ -1,0 +1,28 @@
+package Pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+
+public class HomePage {
+	private WebDriver driver;
+	
+	public HomePage(WebDriver driver) {
+		this.driver = driver;
+	}
+	
+	public void localizProdutos(String produto) {
+		driver.findElement(By.id("search")).clear();
+		driver.findElement(By.id("search")).sendKeys(Keys.chord(produto));
+		driver.findElement(By.cssSelector(".button-search")).click();
+	}
+	
+	public void clicanoProduto3() {
+		driver.findElement(By.cssSelector(".liProduct:nth-child(3) .nome_produto")).click();
+	}
+	
+	public String descricaoProduto() {
+		String  produto = driver.findElement(By.cssSelector("h1")).getText();
+		return produto;
+	}
+}

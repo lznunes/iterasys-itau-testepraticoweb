@@ -1,0 +1,60 @@
+package Steps;
+
+import java.util.concurrent.TimeUnit;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import Pages.HomePage;
+import cucumber.api.PendingException;
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
+public class ConsultaRacaoSteps {
+	
+	private static WebDriver driver;
+	protected HomePage homePage;
+	
+	@Before
+	public static void inicia() {
+		System.setProperty("webdriver.chrome.driver","C:\\Users\\nunesnel\\aula\\iterasys-web\\TestWeb\\drives\\chromedriver.exe");
+		driver = new ChromeDriver();
+		driver.manage().timeouts().implicitlyWait(50000, TimeUnit.MILLISECONDS);
+	}
+	
+	@Given("^Acesso o site$")
+	public void acesso_o_site() throws Throwable {
+	    homePage.carregasite();
+	    assertThat(homePage.obterTitulo(), is("Pet Shop: Petz o maior pet shop do Brasil. "));
+	}
+
+	@When("^Consulta o terceiro produto retornado da busca$")
+	public void consulta_o_terceiro_produto_retornado_da_busca() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new PendingException();
+	}
+
+	@Then("^Valida nome do produto, fornecedor, preco normal e precoassinante$")
+	public void valida_nome_do_produto_fornecedor_preco_normal_e_precoassinante() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new PendingException();
+	}
+
+	@Then("^Insire o produto no carrinho de compras$")
+	public void insire_o_produto_no_carrinho_de_compras() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new PendingException();
+	}
+
+	@Then("^Valide se os dados do item tres continuam identicos$")
+	public void valide_se_os_dados_do_item_tres_continuam_identicos() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new PendingException();
+	}
+	
+	@After
+	public static void encerra() {
+		driver.quit();
+	}
+}

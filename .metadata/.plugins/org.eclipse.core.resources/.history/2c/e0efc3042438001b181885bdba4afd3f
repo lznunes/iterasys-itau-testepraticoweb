@@ -1,0 +1,27 @@
+package Base;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class Base {
+	
+
+	
+
+
+
+	
+	//Gera pasta para salvar logs
+	public static String gerapastalog() {
+		Date date = new Date();
+		SimpleDateFormat DateFor = new SimpleDateFormat("yyyy-MM-dd hhmmss");
+		String stringdate = DateFor.format(date);
+		return stringdate;
+	}
+
+
+	
+	
+	
+
+}

@@ -1,0 +1,17 @@
+package runners;
+
+import org.junit.runner.RunWith;
+
+import cucumber.api.junit.Cucumber;
+
+@RunWith(Cucumber.class)
+@CucumberOptions(
+		features = "C:\\Users\\nunesnel\\aula\\iterasys-web\\TestWeb\\src\\test\\resources\\Features\\ConsultaMass.feature",
+		glue = "steps",
+		tags = "@massa",
+		plugin - "petty",
+		monochrome = true
+		)
+public class Runner {
+
+}

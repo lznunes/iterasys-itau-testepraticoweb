@@ -1,0 +1,7 @@
+# language pt
+Funcionalidade: Consultar produtos no site
+Cenario: Consulta por Racao
+Dado Acesso o site.
+Quando Consulta o terceiro produto retornado da busca
+Então Valida nome do produto, fornecedor, preco normal e precoassinante
+E Esvazia carrinho
